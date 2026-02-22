@@ -8,7 +8,12 @@ const prisma = new PrismaClient();
 const app = express();
 const port = 5001;
 
-app.use(cors());
+app.use(cors({
+    origin: '*',
+    credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization']
+}));
 app.use(express.json());
 
 const JWT_SECRET = process.env.JWT_SECRET || 'fallback_secret';
@@ -40,8 +45,9 @@ app.post('/api/auth/register', async (req, res) => {
 
         const token = jwt.sign({ id: user.id }, JWT_SECRET, { expiresIn: '7d' });
         res.status(201).json({ token, user: { id: user.id, email: user.email, username: user.username } });
-    } catch (err) {
-        res.status(500).json({ error: 'Registration failed' });
+    } catch (err: any) {
+        console.error('Registration Prisma Error:', err);
+        res.status(500).json({ error: err.message || 'Registration failed' });
     }
 });
 
@@ -56,8 +62,9 @@ app.post('/api/auth/login', async (req, res) => {
 
         const token = jwt.sign({ id: user.id }, JWT_SECRET, { expiresIn: '7d' });
         res.json({ token, user: { id: user.id, email: user.email, username: user.username } });
-    } catch (err) {
-        res.status(500).json({ error: 'Login failed' });
+    } catch (err: any) {
+        console.error('Login Prisma Error:', err);
+        res.status(500).json({ error: err.message || 'Login failed' });
     }
 });
 
