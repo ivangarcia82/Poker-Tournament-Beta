@@ -27,8 +27,7 @@ export const I18nProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     const [language, setLanguage] = useState<Language>(() => {
         const saved = localStorage.getItem('language');
         if (saved === 'en' || saved === 'es') return saved;
-        const browserLang = navigator.language.split('-')[0];
-        return browserLang === 'es' ? 'es' : 'en';
+        return 'en';
     });
 
     useEffect(() => {
