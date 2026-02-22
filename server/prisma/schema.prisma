@@ -1,0 +1,79 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String       @id @default(uuid())
+  email        String       @unique
+  username     String
+  passwordHash String
+  tournaments  Tournament[]
+  
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+}
+
+model Tournament {
+  id                   String   @id @default(uuid())
+  
+  user                 User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId               String
+  
+  name                 String
+  date                 String
+  status               String   @default("draft")
+  buyIn                Float
+  startingChips        Float
+  currentLevelIndex    Int      @default(0)
+  timeRemainingSeconds Int      @default(1200)
+  rakePercentage       Float    @default(0)
+  customPayouts        Float[]  @default([])
+
+  levels               Level[]
+  bonuses              Bonus[]
+  players              Player[]
+
+  createdAt            DateTime @default(now())
+  updatedAt            DateTime @updatedAt
+}
+
+model Level {
+  id              String      @id @default(uuid())
+  level           Int
+  smallBlind      Int
+  bigBlind        Int
+  ante            Int
+  durationMinutes Int
+  isBreak         Boolean
+  breakName       String?
+  
+  tournament      Tournament  @relation(fields: [tournamentId], references: [id], onDelete: Cascade)
+  tournamentId    String
+}
+
+model Bonus {
+  id           String      @id @default(uuid())
+  name         String
+  cost         Float
+  chips        Float
+  
+  tournament   Tournament  @relation(fields: [tournamentId], references: [id], onDelete: Cascade)
+  tournamentId String
+}
+
+model Player {
+  id             String      @id @default(uuid())
+  name           String
+  status         String      @default("active")
+  reEntries      Int         @default(0)
+  position       Int?
+  appliedBonuses String[]    @default([])
+  
+  tournament     Tournament  @relation(fields: [tournamentId], references: [id], onDelete: Cascade)
+  tournamentId   String
+}

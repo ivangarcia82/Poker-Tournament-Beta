@@ -1,0 +1,131 @@
+.layout {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    border-radius: 0;
+    border-left: none;
+    border-right: none;
+    border-top: none;
+    margin-bottom: 2rem;
+}
+
+.header-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 4rem;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    cursor: pointer;
+    transition: transform var(--transition-fast);
+}
+
+.logo:hover {
+    transform: scale(1.02);
+}
+
+.logo h1 {
+    font-size: 1.25rem;
+    background: linear-gradient(to right, var(--primary), var(--accent));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    margin: 0;
+}
+
+.logo-icon {
+    font-size: 1.5rem;
+    color: var(--primary);
+    filter: drop-shadow(0 0 8px var(--primary-glow));
+}
+
+.nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.user-greeting {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    margin-right: 1rem;
+}
+
+.controls {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-right: 1.5rem;
+    padding-right: 1.5rem;
+    border-right: 1px solid var(--border-light);
+}
+
+.theme-toggle-wrapper {
+    display: flex;
+    background-color: var(--bg-input);
+    border-radius: 99px;
+    padding: 0.25rem;
+    border: 1px solid var(--border-light);
+}
+
+.icon-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 99px;
+    color: var(--text-muted);
+    transition: all var(--transition-fast);
+    background: transparent;
+}
+
+.icon-btn:hover {
+    color: var(--text-main);
+}
+
+.icon-btn.active {
+    background-color: var(--bg-card);
+    color: var(--primary);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.lang-toggle-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.35rem 0.75rem;
+    border-radius: 99px;
+    background-color: var(--bg-input);
+    border: 1px solid var(--border-light);
+    color: var(--text-main);
+    transition: all var(--transition-fast);
+    cursor: pointer;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.lang-toggle-btn:hover {
+    background-color: var(--bg-glass);
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+.lang-text {
+    letter-spacing: 0.5px;
+}
+
+.main-content {
+    flex: 1;
+    padding-bottom: 3rem;
+}

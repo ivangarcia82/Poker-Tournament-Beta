@@ -1,0 +1,70 @@
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { TournamentProvider, useTournament } from './store/TournamentContext';
+import { I18nProvider } from './store/I18nContext';
+import { TourProvider } from './store/TourContext';
+import Home from './pages/Home';
+import Login from './pages/Login';
+import CreateTournament from './pages/CreateTournament';
+import Timer from './pages/Timer';
+import Management from './pages/Management';
+import { Layout } from './components/Layout';
+import { TourGuide } from './components/TourGuide';
+
+const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
+  const { state } = useTournament();
+  if (!state.user) {
+    return <Navigate to="/login" replace />;
+  }
+  return <>{children}</>;
+};
+
+const AppRoutes = () => {
+  return (
+    <Routes>
+      <Route path="/login" element={<Login />} />
+      <Route path="/" element={
+        <ProtectedRoute>
+          <Layout>
+            <Home />
+          </Layout>
+        </ProtectedRoute>
+      } />
+      <Route path="/create" element={
+        <ProtectedRoute>
+          <Layout>
+            <CreateTournament />
+          </Layout>
+        </ProtectedRoute>
+      } />
+      <Route path="/tournament/:id/timer" element={
+        <ProtectedRoute>
+          <Timer />
+        </ProtectedRoute>
+      } />
+      <Route path="/tournament/:id/manage" element={
+        <ProtectedRoute>
+          <Layout>
+            <Management />
+          </Layout>
+        </ProtectedRoute>
+      } />
+    </Routes>
+  );
+};
+
+function App() {
+  return (
+    <I18nProvider>
+      <TourProvider>
+        <TournamentProvider>
+          <BrowserRouter>
+            <AppRoutes />
+            <TourGuide />
+          </BrowserRouter>
+        </TournamentProvider>
+      </TourProvider>
+    </I18nProvider>
+  );
+}
+
+export default App;
