@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { Analytics } from '@vercel/analytics/react';
 import { TournamentProvider, useTournament } from './store/TournamentContext';
 import { I18nProvider } from './store/I18nContext';
 import Landing from './pages/Landing';
@@ -58,6 +59,7 @@ function App() {
       <TournamentProvider>
         <BrowserRouter>
           <AppRoutes />
+          <Analytics />
         </BrowserRouter>
       </TournamentProvider>
     </I18nProvider>
