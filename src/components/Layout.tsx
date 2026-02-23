@@ -2,14 +2,12 @@ import React from 'react';
 import { useTournament } from '../store/TournamentContext';
 import { useI18n } from '../store/I18nContext';
 import { useNavigate } from 'react-router-dom';
-import { LogOut, LayoutDashboard, PlusCircle, Globe, HelpCircle } from 'lucide-react';
-import { useTour } from '../store/TourContext';
+import { LogOut, LayoutDashboard, PlusCircle, Globe } from 'lucide-react';
 import './Layout.css';
 
 export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
     const { state, logout } = useTournament();
     const { language, setLanguage, t } = useI18n();
-    const { startTour } = useTour();
     const navigate = useNavigate();
 
     const handleLogout = () => {
@@ -34,9 +32,6 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
                         <span className="user-greeting">{t('nav.welcome', { name: state.user?.username || '' })}</span>
 
                         <div className="controls">
-                            <button className="icon-btn help-tour-btn" onClick={startTour} title={t('tour.helpButton')}>
-                                <HelpCircle size={16} />
-                            </button>
                             <button className="lang-toggle-btn" onClick={toggleLanguage} title={t('settings.language')}>
                                 <Globe size={16} />
                                 <span className="lang-text">{language.toUpperCase()}</span>

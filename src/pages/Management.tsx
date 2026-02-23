@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useTournament } from '../store/TournamentContext';
 import { useI18n } from '../store/I18nContext';
-import { useTour } from '../store/TourContext';
 import { nanoid } from 'nanoid';
 import type { Player } from '../types';
 import { UserPlus, UserMinus, RefreshCw, Trophy, ArrowLeft, DollarSign, Edit2, Check, X, Plus, Trash2 } from 'lucide-react';
@@ -14,7 +13,6 @@ const Management: React.FC = () => {
     const { state, updateTournament } = useTournament();
     const { t } = useI18n();
     const navigate = useNavigate();
-    const { run, stepIndex, setStepIndex } = useTour();
 
     const tournament = state.tournaments.find(t => t.id === id);
     const [newPlayerName, setNewPlayerName] = useState('');
@@ -52,10 +50,6 @@ const Management: React.FC = () => {
         updateTournament(tournament.id, {
             players: [...tournament.players, newPlayer]
         });
-
-        if (run && stepIndex === 7) {
-            setStepIndex(8);
-        }
 
         setNewPlayerName('');
         setSelectedBonuses([]);

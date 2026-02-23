@@ -23,21 +23,6 @@ const features = [
     { key: 'payouts' as const, icon: Trophy },
 ];
 
-const faqs = [
-    {
-        q: "What makes this different from other poker timers?",
-        a: "Our platform is built specifically for modern directors. It syncs in real-time across devices, features an integrated accounting system for payouts, and has a sleek UI that players actually want to look at."
-    },
-    {
-        q: "Do I need to download an app?",
-        a: "No! The Poker Tournament Manager is a fully responsive web application. You can manage everything from your laptop, and cast the timer to a TV using a standard browser."
-    },
-    {
-        q: "How many players can I manage?",
-        a: "The system is designed to handle everything from an intimate 9-handed home game to a multi-day 500+ player casino event without breaking a sweat."
-    }
-];
-
 export default function Landing() {
     const navigate = useNavigate();
     const { t, language, setLanguage } = useI18n();
@@ -46,6 +31,12 @@ export default function Landing() {
     const [activeFeature, setActiveFeature] = useState(0);
     const [progress, setProgress] = useState(0);
     const [activeFaq, setActiveFaq] = useState<number | null>(0);
+
+    const faqsList = [
+        { q: t('landing.faq1.q' as any), a: t('landing.faq1.a' as any) },
+        { q: t('landing.faq2.q' as any), a: t('landing.faq2.a' as any) },
+        { q: t('landing.faq3.q' as any), a: t('landing.faq3.a' as any) }
+    ];
 
     // If already logged in, redirect to dashboard
     useEffect(() => {
@@ -162,7 +153,7 @@ export default function Landing() {
                             }}
                         >
                             <Play size={20} className="play-icon" fill="currentColor" />
-                            Ver Demo
+                            {t('landing.watchDemo' as any)}
                         </button>
                     </motion.div>
                 </motion.div>
@@ -192,20 +183,20 @@ export default function Landing() {
                                 <div className="mockup-card stat-card" style={{ height: '100%', border: 'none' }}>
                                     <Trophy size={24} className="mockup-stat-icon" />
                                     <div className="mockup-stat-value">54</div>
-                                    <div className="mockup-stat-label">Players</div>
+                                    <div className="mockup-stat-label">{t('home.players' as any)}</div>
 
                                     <Coins size={24} className="mockup-stat-icon" style={{ marginTop: '2rem' }} />
                                     <div className="mockup-stat-value">$12.5k</div>
-                                    <div className="mockup-stat-label">Prize Pool</div>
+                                    <div className="mockup-stat-label">{t('timer.netPrizePool' as any)}</div>
                                 </div>
                             </div>
                             <div className="mockup-main">
                                 <div className="mockup-card tall">
                                     <div className="mockup-inner-timer">
-                                        <div className="mockup-level">NIVEL 8</div>
+                                        <div className="mockup-level">{t('create.level' as any).toUpperCase()} 8</div>
                                         <div className="mockup-time">14:59</div>
                                         <div className="mockup-blinds">
-                                            <span className="mockup-blind-item">BLINDS: <span className="mockup-blind-value">500 / 1000</span></span>
+                                            <span className="mockup-blind-item">{t('timer.blinds' as any).toUpperCase()}: <span className="mockup-blind-value">500 / 1000</span></span>
                                         </div>
                                         <div className="mockup-progress-bar">
                                             <motion.div
@@ -220,11 +211,11 @@ export default function Landing() {
                                 <div className="mockup-grid">
                                     <div className="mockup-card sum stat-card">
                                         <div className="mockup-stat-value">15.4k</div>
-                                        <div className="mockup-stat-label">Avg Stack</div>
+                                        <div className="mockup-stat-label">{t('timer.avgStack' as any)}</div>
                                     </div>
                                     <div className="mockup-card sum stat-card">
                                         <div className="mockup-stat-value">25</div>
-                                        <div className="mockup-stat-label">Next Break</div>
+                                        <div className="mockup-stat-label">{t('landing.mockup.nextBreak' as any)}</div>
                                     </div>
                                 </div>
                             </div>
@@ -244,10 +235,9 @@ export default function Landing() {
                         variants={fadeUp}
                         custom={0}
                     >
-                        <h2 className="section-title">Control Total en Tiempo Real</h2>
+                        <h2 className="section-title">{t('landing.featuresTitle' as any)}</h2>
                         <p className="section-subtitle">
-                            Nuestra plataforma está diseñada para directores exigentes que no pueden permitirse fallos.
-                            Experimenta el futuro de la gestión de eventos de poker.
+                            {t('landing.featuresSubtitle' as any)}
                         </p>
                     </motion.div>
 
@@ -296,10 +286,10 @@ export default function Landing() {
                                             exit={{ opacity: 0, scale: 1.05, filter: 'blur(10px)' }}
                                             transition={{ duration: 0.5, ease: easeOut }}
                                         >
-                                            <div className="level-badge">NIVEL 8</div>
+                                            <div className="level-badge">{t('create.level' as any).toUpperCase()} 8</div>
                                             <div className="time-display">14:59</div>
                                             <div className="blinds-display">500 / 1,000</div>
-                                            <div className="ante-display">Ante: 1,000</div>
+                                            <div className="ante-display">{t('timer.ante' as any)}: 1,000</div>
 
                                             <div className="timer-progress-bar">
                                                 <motion.div
@@ -334,10 +324,10 @@ export default function Landing() {
                                                             <Users size={16} />
                                                         </div>
                                                         <div className="player-info">
-                                                            <div className="player-name">Jugador {p}</div>
+                                                            <div className="player-name">{t('landing.mockup.player' as any)} {p}</div>
                                                             <div className="player-stack">15,000 pts</div>
                                                         </div>
-                                                        <div className="player-badge">Añadido</div>
+                                                        <div className="player-badge">{t('landing.mockup.added' as any)}</div>
                                                     </motion.div>
                                                 ))}
                                             </div>
@@ -346,7 +336,7 @@ export default function Landing() {
                                                 whileHover={{ scale: 1.05 }}
                                                 whileTap={{ scale: 0.95 }}
                                             >
-                                                Añadir Jugador
+                                                {t('manage.addPlayer' as any)}
                                             </motion.button>
                                         </motion.div>
                                     )}
@@ -363,7 +353,7 @@ export default function Landing() {
                                             <div className="prize-pool-header">
                                                 <Coins size={32} className="coins-icon" />
                                                 <div className="prize-amount">$ 15,400</div>
-                                                <div className="prize-label">Pozo de Premios Total</div>
+                                                <div className="prize-label">{t('landing.mockup.totalPrizePool' as any)}</div>
                                             </div>
                                             <div className="payout-tiers">
                                                 {[
@@ -411,9 +401,9 @@ export default function Landing() {
                         variants={fadeUp}
                         custom={0}
                     >
-                        <h2 className="section-title">El Proceso Perfecto</h2>
+                        <h2 className="section-title">{t('landing.hiw.title' as any)}</h2>
                         <p className="section-subtitle">
-                            Configura tu evento en minutos, no en horas. Diseñado para que te enfoques en el juego.
+                            {t('landing.hiw.subtitle' as any)}
                         </p>
                     </motion.div>
 
@@ -423,8 +413,8 @@ export default function Landing() {
                             <div className="hiw-icon setup">
                                 <Activity size={28} />
                             </div>
-                            <h3>Configuración Rápida</h3>
-                            <p>Define ciegas, recompras, add-ons y premios con plantillas prestablecidas o personaliza cada detalle a tu gusto.</p>
+                            <h3>{t('landing.hiw.step1Title' as any)}</h3>
+                            <p>{t('landing.hiw.step1Desc' as any)}</p>
                         </motion.div>
 
                         <motion.div className="hiw-card" initial="hidden" whileInView="visible" viewport={{ once: true, margin: "0px 0px -50px 0px" }} variants={fadeUp} custom={2}>
@@ -432,8 +422,8 @@ export default function Landing() {
                             <div className="hiw-icon manage">
                                 <Users size={28} />
                             </div>
-                            <h3>Gestión en Vivo</h3>
-                            <p>Sienta jugadores, rastrea eliminaciones, contabiliza recompras y gestiona traslados de mesa con un solo clic.</p>
+                            <h3>{t('landing.hiw.step2Title' as any)}</h3>
+                            <p>{t('landing.hiw.step2Desc' as any)}</p>
                         </motion.div>
 
                         <motion.div className="hiw-card" initial="hidden" whileInView="visible" viewport={{ once: true, margin: "0px 0px -50px 0px" }} variants={fadeUp} custom={3}>
@@ -441,8 +431,8 @@ export default function Landing() {
                             <div className="hiw-icon finish">
                                 <Trophy size={28} />
                             </div>
-                            <h3>Contabilidad Automática</h3>
-                            <p>Al finalizar, el sistema calcula automáticamente los pagos por posición con precisión absoluta.</p>
+                            <h3>{t('landing.hiw.step3Title' as any)}</h3>
+                            <p>{t('landing.hiw.step3Desc' as any)}</p>
                         </motion.div>
                     </div>
                 </div>
@@ -459,12 +449,12 @@ export default function Landing() {
                         variants={fadeUp}
                         custom={0}
                     >
-                        <h2 className="section-title">Preguntas Frecuentes</h2>
-                        <p className="section-subtitle">Todo lo que necesitas saber sobre PTM.</p>
+                        <h2 className="section-title">{t('landing.faq.title' as any)}</h2>
+                        <p className="section-subtitle">{t('landing.faq.subtitle' as any)}</p>
                     </motion.div>
 
                     <div className="faq-list">
-                        {faqs.map((faq, index) => {
+                        {faqsList.map((faq, index) => {
                             const isActive = activeFaq === index;
                             return (
                                 <motion.div
@@ -504,10 +494,10 @@ export default function Landing() {
             {/* ── CTA Banner ── */}
             <section className="cta-banner">
                 <div className="cta-content">
-                    <h2>¿Listo para elevar el nivel de tus torneos?</h2>
-                    <p>Únete a la nueva generación de directores y gestiona tu evento sin complicaciones.</p>
+                    <h2>{t('landing.cta.title' as any)}</h2>
+                    <p>{t('landing.cta.subtitle' as any)}</p>
                     <button className="btn-l-primary cta-btn" onClick={() => navigate('/login')}>
-                        Abrir Cuenta Ahora
+                        {t('landing.cta.button' as any)}
                     </button>
                 </div>
             </section>

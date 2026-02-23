@@ -215,18 +215,6 @@ button {
   flex: 1;
 }
 
-/* Tour Guide Specific Hacks */
-.react-joyride__spotlight>.step-actions {
-  position: relative !important;
-  z-index: 9999 !important;
-}
-
-/* Create container spotlight logic */
-.create-container.react-joyride__spotlight {
-  position: relative !important;
-  z-index: 9999 !important;
-  background-color: var(--bg-primary) !important;
-}
 
 /* ─────────────────────────────────────────────────────────────────────────────
    LANDING PAGE STYLES

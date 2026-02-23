@@ -2,7 +2,6 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTournament } from '../store/TournamentContext';
 import { useI18n } from '../store/I18nContext';
-import { useTour } from '../store/TourContext';
 import { PlusCircle, Play, Settings, Trash2, Calendar, Users } from 'lucide-react';
 import { format } from 'date-fns';
 import './Home.css';
@@ -11,7 +10,6 @@ const Home: React.FC = () => {
     const { state, deleteTournament } = useTournament();
     const { t } = useI18n();
     const navigate = useNavigate();
-    const { run, stepIndex, setStepIndex } = useTour();
 
     const userTournaments = state.tournaments.filter(t => t.userId === state.user?.id);
 
@@ -35,11 +33,6 @@ const Home: React.FC = () => {
                     className="btn btn-primary"
                     onClick={() => {
                         navigate('/create');
-                        if (run && stepIndex === 1) {
-                            setTimeout(() => {
-                                setStepIndex(2);
-                            }, 150);
-                        }
                     }}
                 >
                     <PlusCircle size={18} /> {t('home.createNew')}
@@ -54,9 +47,6 @@ const Home: React.FC = () => {
                     <button
                         className="btn btn-primary mt-4"
                         onClick={() => {
-                            if (run && stepIndex === 1) {
-                                setStepIndex(2);
-                            }
                             navigate('/create');
                         }}
                     >
@@ -101,9 +91,6 @@ const Home: React.FC = () => {
                                 <button
                                     className="btn btn-ghost"
                                     onClick={() => {
-                                        if (run && stepIndex === 6) {
-                                            setStepIndex(7);
-                                        }
                                         navigate(`/tournament/${tournament.id}/manage`);
                                     }}
                                     title={t('home.manage')}

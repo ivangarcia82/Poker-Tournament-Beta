@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTournament } from '../store/TournamentContext';
 import { useI18n } from '../store/I18nContext';
-import { useTour } from '../store/TourContext';
 import { nanoid } from 'nanoid';
 import type { BlindLevel, Tournament, TournamentBonus } from '../types';
 import { Plus, Trash2, Save, ChevronRight, ChevronLeft } from 'lucide-react';
@@ -25,16 +24,10 @@ const CreateTournament: React.FC = () => {
     const { state, addTournament } = useTournament();
     const { t } = useI18n();
     const navigate = useNavigate();
-    const { run, stepIndex, setStepIndex } = useTour();
     const [step, setStep] = useState(1);
 
-    const handleNextWizardStep = (nextWizardStep: number, targetTourIndex: number) => {
+    const handleNextWizardStep = (nextWizardStep: number) => {
         setStep(nextWizardStep);
-        if (run && stepIndex === targetTourIndex - 1) {
-            setTimeout(() => {
-                setStepIndex(targetTourIndex);
-            }, 150);
-        }
     };
 
     // Form State
@@ -166,13 +159,6 @@ const CreateTournament: React.FC = () => {
 
         addTournament(newTournament);
 
-        if (run && stepIndex === 5) {
-            // Jump to step 6 (Dashboard - Manage)
-            setTimeout(() => {
-                setStepIndex(6);
-            }, 150);
-        }
-
         navigate('/dashboard');
     };
 
@@ -241,7 +227,7 @@ const CreateTournament: React.FC = () => {
 
                         <div className="step-actions">
                             <button className="btn btn-ghost" onClick={() => navigate('/dashboard')}>{t('common.cancel')}</button>
-                            <button className="btn btn-primary" onClick={() => handleNextWizardStep(2, 3)}>
+                            <button className="btn btn-primary" onClick={() => handleNextWizardStep(2)}>
                                 {t('create.nextStep')} <ChevronRight size={18} />
                             </button>
                         </div>
@@ -311,7 +297,7 @@ const CreateTournament: React.FC = () => {
                             <button className="btn btn-ghost" onClick={() => setStep(1)}>
                                 <ChevronLeft size={18} /> {t('create.back')}
                             </button>
-                            <button className="btn btn-primary" onClick={() => handleNextWizardStep(3, 4)}>
+                            <button className="btn btn-primary" onClick={() => handleNextWizardStep(3)}>
                                 {t('create.nextStep')} <ChevronRight size={18} />
                             </button>
                         </div>
@@ -412,7 +398,7 @@ const CreateTournament: React.FC = () => {
                             <button className="btn btn-ghost" onClick={() => setStep(2)}>
                                 <ChevronLeft size={18} /> {t('create.back')}
                             </button>
-                            <button className="btn btn-primary" onClick={() => handleNextWizardStep(4, 5)}>
+                            <button className="btn btn-primary" onClick={() => handleNextWizardStep(4)}>
                                 {t('create.nextStep')} <ChevronRight size={18} />
                             </button>
                         </div>
