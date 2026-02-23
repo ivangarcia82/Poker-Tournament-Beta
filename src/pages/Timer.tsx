@@ -191,7 +191,7 @@ const Timer: React.FC = () => {
                 <div className="flex-1">
                     <button className="btn btn-ghost" onClick={() => {
                         updateTournament(tournament.id, { timeRemainingSeconds: timeRemaining, currentLevelIndex });
-                        navigate('/');
+                        navigate('/dashboard');
                     }}>
                         <ArrowLeft size={20} /> {t('timer.exit')}
                     </button>

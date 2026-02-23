@@ -163,7 +163,7 @@ const Management: React.FC = () => {
     return (
         <div className="management-container">
             <div className="mb-4">
-                <button className="btn btn-ghost" onClick={() => navigate('/')}>
+                <button className="btn btn-ghost" onClick={() => navigate('/dashboard')}>
                     <ArrowLeft size={18} /> {t('manage.backToHome')}
                 </button>
             </div>

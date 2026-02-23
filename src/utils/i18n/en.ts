@@ -1,4 +1,17 @@
 export const en = {
+    // Landing Page
+    'landing.title': 'The Ultimate Tool for Poker Tournament Directors',
+    'landing.subtitle': 'Professional management made simple. Track blinds, players, and payouts with a sleek, real-time interface designed for high-stakes focus.',
+    'landing.getStarted': 'Launch Your First Tournament',
+    'landing.login': 'Sign In',
+    'landing.features.timer': 'Intelligent Blind Timer',
+    'landing.features.timerDesc': 'Never miss a level up. Dynamic sound alerts, customizable break schedules, and smooth transitions keep your event on schedule.',
+    'landing.features.management': 'Seamless Player Tracking',
+    'landing.features.managementDesc': 'Manage up to 500 players with ease. Track buy-ins, re-entries, and bonuses in real-time without losing focus on the table.',
+    'landing.features.payouts': 'Precision Payout Calculator',
+    'landing.features.payoutsDesc': 'Automatic prize pool distribution based on your custom rules. Ensure every winner gets their fair share instantly.',
+    'landing.footerText': 'Built for the Poker Community • Poker Tournament Manager v1.0',
+
     // Navigation
     'nav.dashboard': 'Dashboard',
     'nav.newTournament': 'New Tournament',
@@ -100,6 +113,10 @@ export const en = {
     'common.edit': 'Edit',
     'common.add': 'Add',
     'common.remove': 'Remove',
+    'common.delete': 'Delete',
+    'common.loading': 'Loading...',
+    'common.error': 'Error',
+    'common.success': 'Success',
 
     // Settings
     'settings.title': 'Settings',

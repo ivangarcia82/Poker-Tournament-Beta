@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Timer, Users, Trophy, ArrowRight, Play, Coins, ShieldCheck, ChevronRight, Activity } from 'lucide-react';
@@ -23,6 +23,21 @@ const features = [
     { key: 'payouts' as const, icon: Trophy },
 ];
 
+const faqs = [
+    {
+        q: "What makes this different from other poker timers?",
+        a: "Our platform is built specifically for modern directors. It syncs in real-time across devices, features an integrated accounting system for payouts, and has a sleek UI that players actually want to look at."
+    },
+    {
+        q: "Do I need to download an app?",
+        a: "No! The Poker Tournament Manager is a fully responsive web application. You can manage everything from your laptop, and cast the timer to a TV using a standard browser."
+    },
+    {
+        q: "How many players can I manage?",
+        a: "The system is designed to handle everything from an intimate 9-handed home game to a multi-day 500+ player casino event without breaking a sweat."
+    }
+];
+
 export default function Landing() {
     const navigate = useNavigate();
     const { t, language, setLanguage } = useI18n();
@@ -30,6 +45,7 @@ export default function Landing() {
 
     const [activeFeature, setActiveFeature] = useState(0);
     const [progress, setProgress] = useState(0);
+    const [activeFaq, setActiveFaq] = useState<number | null>(0);
 
     // If already logged in, redirect to dashboard
     useEffect(() => {
@@ -172,12 +188,44 @@ export default function Landing() {
                             <div className="mockup-title-bar">poker-manager.app</div>
                         </div>
                         <div className="mockup-body-v2">
-                            <div className="mockup-sidebar" />
+                            <div className="mockup-sidebar">
+                                <div className="mockup-card stat-card" style={{ height: '100%', border: 'none' }}>
+                                    <Trophy size={24} className="mockup-stat-icon" />
+                                    <div className="mockup-stat-value">54</div>
+                                    <div className="mockup-stat-label">Players</div>
+
+                                    <Coins size={24} className="mockup-stat-icon" style={{ marginTop: '2rem' }} />
+                                    <div className="mockup-stat-value">$12.5k</div>
+                                    <div className="mockup-stat-label">Prize Pool</div>
+                                </div>
+                            </div>
                             <div className="mockup-main">
-                                <div className="mockup-card tall" />
+                                <div className="mockup-card tall">
+                                    <div className="mockup-inner-timer">
+                                        <div className="mockup-level">NIVEL 8</div>
+                                        <div className="mockup-time">14:59</div>
+                                        <div className="mockup-blinds">
+                                            <span className="mockup-blind-item">BLINDS: <span className="mockup-blind-value">500 / 1000</span></span>
+                                        </div>
+                                        <div className="mockup-progress-bar">
+                                            <motion.div
+                                                className="mockup-progress-fill"
+                                                initial={{ width: '100%' }}
+                                                animate={{ width: '0%' }}
+                                                transition={{ duration: 15, repeat: Infinity, ease: 'linear' }}
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
                                 <div className="mockup-grid">
-                                    <div className="mockup-card sum" />
-                                    <div className="mockup-card sum" />
+                                    <div className="mockup-card sum stat-card">
+                                        <div className="mockup-stat-value">15.4k</div>
+                                        <div className="mockup-stat-label">Avg Stack</div>
+                                    </div>
+                                    <div className="mockup-card sum stat-card">
+                                        <div className="mockup-stat-value">25</div>
+                                        <div className="mockup-stat-label">Next Break</div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -192,7 +240,7 @@ export default function Landing() {
                         className="showcase-header"
                         initial="hidden"
                         whileInView="visible"
-                        viewport={{ once: true, margin: "-100px" }}
+                        viewport={{ once: true, margin: "0px 0px -100px 0px" }}
                         variants={fadeUp}
                         custom={0}
                     >
@@ -348,6 +396,107 @@ export default function Landing() {
                                 </AnimatePresence>
                             </div>
                         </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* ── How It Works Section ── */}
+            <section className="how-it-works-section">
+                <div className="hiw-container">
+                    <motion.div
+                        className="hiw-header"
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true, margin: "0px 0px -100px 0px" }}
+                        variants={fadeUp}
+                        custom={0}
+                    >
+                        <h2 className="section-title">El Proceso Perfecto</h2>
+                        <p className="section-subtitle">
+                            Configura tu evento en minutos, no en horas. Diseñado para que te enfoques en el juego.
+                        </p>
+                    </motion.div>
+
+                    <div className="hiw-grid">
+                        <motion.div className="hiw-card" initial="hidden" whileInView="visible" viewport={{ once: true, margin: "0px 0px -50px 0px" }} variants={fadeUp} custom={1}>
+                            <div className="hiw-step">1</div>
+                            <div className="hiw-icon setup">
+                                <Activity size={28} />
+                            </div>
+                            <h3>Configuración Rápida</h3>
+                            <p>Define ciegas, recompras, add-ons y premios con plantillas prestablecidas o personaliza cada detalle a tu gusto.</p>
+                        </motion.div>
+
+                        <motion.div className="hiw-card" initial="hidden" whileInView="visible" viewport={{ once: true, margin: "0px 0px -50px 0px" }} variants={fadeUp} custom={2}>
+                            <div className="hiw-step">2</div>
+                            <div className="hiw-icon manage">
+                                <Users size={28} />
+                            </div>
+                            <h3>Gestión en Vivo</h3>
+                            <p>Sienta jugadores, rastrea eliminaciones, contabiliza recompras y gestiona traslados de mesa con un solo clic.</p>
+                        </motion.div>
+
+                        <motion.div className="hiw-card" initial="hidden" whileInView="visible" viewport={{ once: true, margin: "0px 0px -50px 0px" }} variants={fadeUp} custom={3}>
+                            <div className="hiw-step">3</div>
+                            <div className="hiw-icon finish">
+                                <Trophy size={28} />
+                            </div>
+                            <h3>Contabilidad Automática</h3>
+                            <p>Al finalizar, el sistema calcula automáticamente los pagos por posición con precisión absoluta.</p>
+                        </motion.div>
+                    </div>
+                </div>
+            </section>
+
+            {/* ── FAQ Section ── */}
+            <section className="faq-section">
+                <div className="faq-container">
+                    <motion.div
+                        className="faq-header"
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true, margin: "0px 0px -100px 0px" }}
+                        variants={fadeUp}
+                        custom={0}
+                    >
+                        <h2 className="section-title">Preguntas Frecuentes</h2>
+                        <p className="section-subtitle">Todo lo que necesitas saber sobre PTM.</p>
+                    </motion.div>
+
+                    <div className="faq-list">
+                        {faqs.map((faq, index) => {
+                            const isActive = activeFaq === index;
+                            return (
+                                <motion.div
+                                    key={index}
+                                    className={`faq-item ${isActive ? 'active' : ''}`}
+                                    onClick={() => setActiveFaq(isActive ? null : index)}
+                                    initial="hidden"
+                                    whileInView="visible"
+                                    viewport={{ once: true, margin: "0px 0px -50px 0px" }}
+                                    variants={fadeUp}
+                                    custom={index + 1}
+                                >
+                                    <div className="faq-question">
+                                        <span>{faq.q}</span>
+                                        <ChevronRight size={20} className="faq-icon" style={{ transform: isActive ? 'rotate(90deg)' : 'rotate(0deg)' }} />
+                                    </div>
+                                    <AnimatePresence>
+                                        {isActive && (
+                                            <motion.div
+                                                initial={{ height: 0, opacity: 0 }}
+                                                animate={{ height: 'auto', opacity: 1 }}
+                                                exit={{ height: 0, opacity: 0 }}
+                                                transition={{ duration: 0.3 }}
+                                                style={{ overflow: 'hidden' }}
+                                            >
+                                                <div className="faq-answer">{faq.a}</div>
+                                            </motion.div>
+                                        )}
+                                    </AnimatePresence>
+                                </motion.div>
+                            );
+                        })}
                     </div>
                 </div>
             </section>

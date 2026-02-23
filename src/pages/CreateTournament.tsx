@@ -173,7 +173,7 @@ const CreateTournament: React.FC = () => {
             }, 150);
         }
 
-        navigate('/');
+        navigate('/dashboard');
     };
 
     return (
@@ -240,7 +240,7 @@ const CreateTournament: React.FC = () => {
                         </div>
 
                         <div className="step-actions">
-                            <button className="btn btn-ghost" onClick={() => navigate('/')}>{t('common.cancel')}</button>
+                            <button className="btn btn-ghost" onClick={() => navigate('/dashboard')}>{t('common.cancel')}</button>
                             <button className="btn btn-primary" onClick={() => handleNextWizardStep(2, 3)}>
                                 {t('create.nextStep')} <ChevronRight size={18} />
                             </button>

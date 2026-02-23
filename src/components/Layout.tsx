@@ -25,7 +25,7 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
         <div className="layout">
             <header className="header glass-panel">
                 <div className="header-content container">
-                    <div className="logo" onClick={() => navigate('/')}>
+                    <div className="logo" onClick={() => navigate('/dashboard')}>
                         <span className="logo-icon">♠️</span>
                         <h1>Poker Manager</h1>
                     </div>
@@ -43,7 +43,7 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
                             </button>
                         </div>
 
-                        <button className="btn btn-ghost" onClick={() => navigate('/')}>
+                        <button className="btn btn-ghost" onClick={() => navigate('/dashboard')}>
                             <LayoutDashboard size={18} /> {t('nav.dashboard')}
                         </button>
                         <button className="btn btn-primary" onClick={() => navigate('/create')}>

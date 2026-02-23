@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTournament } from '../store/TournamentContext';
 import { useI18n } from '../store/I18nContext';
@@ -12,9 +12,16 @@ const Login: React.FC = () => {
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
 
-    const { login, register } = useTournament();
+    const { state, login, register } = useTournament();
     const { t } = useI18n();
     const navigate = useNavigate();
+
+    // Redirect if already logged in
+    useEffect(() => {
+        if (state.user) {
+            navigate('/dashboard', { replace: true });
+        }
+    }, [state.user, navigate]);
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
@@ -29,7 +36,7 @@ const Login: React.FC = () => {
                 if (!email.trim() || !password.trim()) throw new Error(t('login.allFieldsReq'));
                 await login(email, password);
             }
-            navigate('/');
+            navigate('/dashboard');
         } catch (err: any) {
             setError(err.message || t('login.authFailed'));
         } finally {
